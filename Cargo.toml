@@ -1,0 +1,15 @@
+[package]
+name = "openwrt-python-pkg"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.70"
+clap = { version = "4.1.11", features = ["derive"] }
+jaq-core = "0.10.0"
+jaq-std = "0.10.0"
+minijinja = "0.30.7"
+reqwest = { version = "0.11.15", features = ["blocking", "json"] }
+serde_json = "1.0.94"

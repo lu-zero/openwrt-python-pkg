@@ -1,0 +1,36 @@
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:={{ name }}
+PKG_VERSION:={{ version }}
+PKG_RELEASE:=1
+
+PYPI_NAME:=$(PKG_NAME)
+PKG_HASH:={{ sha256 }}
+
+PKG_MAINTAINER:=Luca Barbato <lu_zero@gentoo.org>
+PKG_LICENSE:={{ license }}
+PKG_LICENSE_FILES:=LICENSE
+
+include ../pypi.mk
+include $(INCLUDE_DIR)/package.mk
+include ../python3-package.mk
+
+define Package/python3-{{ name }}
+  SECTION:=lang
+  CATEGORY:=Languages
+  SUBMENU:=Python
+  TITLE:={{ summary }}
+  URL:={{ url }}
+  DEPENDS:= \
+      {%- for dep in deps %}
+         {{ dep }} {%- if loop.nextitem -%}\{%- endif %}
+      {%- endfor %}
+endef
+
+define Package/python3-{{ name }}/description
+  {{ summary }}
+endef
+
+$(eval $(call Py3Package,python3-{{ name }}))
+$(eval $(call BuildPackage,python3-{{ name }}))
+$(eval $(call BuildPackage,python3-{{ name }}-src))
